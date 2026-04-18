@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ibrahim AL-Ghamdi — Portfolio</title>
+  <meta name="description" content="Front-end developer portfolio — Ibrahim AL-Ghamdi" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ── LOADER ── -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__bar"></div>
+  </div>
+
+  <!-- ── NAV ── -->
+  <header class="nav" id="mainNav">
+    <div class="nav__logo">Ibrahim<span>.</span></div>
+    <nav class="nav__links" aria-label="Main navigation">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#github">GitHub</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav__actions">
+      <!-- Visitor name display -->
+      <span class="nav__visitor" id="navVisitor" hidden>👋 <span id="navVisitorName"></span></span>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-toggle__icon" id="themeIcon">☀</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ── HERO ── -->
+  <section class="hero" id="home">
+    <div class="hero__time-badge" id="timeBadge" aria-live="polite"></div>
+    <h1 class="hero__title">
+      I build things<br /><em>for the web.</em>
+    </h1>
+    <p class="hero__sub">Front-end developer · Creative thinker · Lifelong learner</p>
+    <div class="hero__cta-row">
+      <a href="#projects" class="btn btn--primary">See my work ↓</a>
+      <a href="#contact" class="btn btn--ghost">Get in touch</a>
+    </div>
+
+    <!-- ── VISIT TIMER ── -->
+    <div class="timer-widget" aria-live="polite">
+      <span class="timer-widget__label">⏱ Time on page</span>
+      <span class="timer-widget__count" id="visitTimer">00:00</span>
+    </div>
+
+    <!-- ── FUN FACT WIDGET ── -->
+    <div class="fact-widget" id="factWidget">
+      <div class="fact-widget__label">💡 Did you know?</div>
+      <p class="fact-widget__text" id="factText">Loading a fun fact…</p>
+      <button class="fact-widget__btn" id="factRefresh" aria-label="Get another fact">↻ New fact</button>
+    </div>
+
+    <div class="hero__blob" aria-hidden="true"></div>
+  </section>
+
+  <!-- ── VISITOR GREETER (State Management) ── -->
+  <section class="section greeter" id="greeterSection">
+    <div class="greeter__card" id="greeterCard">
+      <div id="greeterAsk">
+        <h3>What's your name?</h3>
+        <p>I'll personalise your visit.</p>
+        <div class="greeter__form">
+          <input type="text" id="visitorNameInput" placeholder="Enter your name…" maxlength="40" aria-label="Your name" />
+          <button class="btn btn--primary" id="greeterSubmit">Go →</button>
+        </div>
+      </div>
+      <div id="greeterWelcome" hidden>
+        <h3>Welcome back, <span id="greeterName" class="highlight"></span>! 👋</h3>
+        <p>Great to see you again.</p>
+        <button class="btn btn--ghost btn--sm" id="greeterReset">Not you? Reset</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section class="section about" id="about">
+    <div class="section__label">01 — About me</div>
+    <div class="about__grid">
+      <div class="about__text">
+        <h2>Hey, I'm <span class="highlight">Ibrahim AL-Ghamdi</span>.</h2>
+        <p>
+          I'm a computer science student passionate about building clean,
+          accessible, and delightful web experiences. I love turning ideas
+          into real, interactive things people can use.
+        </p>
+        <p>
+          When I'm not coding, you'll find me exploring design systems,
+          contributing to open source, or perfecting my coffee-brewing technique.
+        </p>
+
+        <!-- Skill level toggle (Complex Logic) -->
+        <div class="skill-level-bar" role="group" aria-label="Filter skills by level">
+          <span class="skill-level__label">Show skills for:</span>
+          <button class="level-btn active" data-level="all">All</button>
+          <button class="level-btn" data-level="beginner">Beginner</button>
+          <button class="level-btn" data-level="intermediate">Intermediate</button>
+          <button class="level-btn" data-level="advanced">Advanced</button>
+        </div>
+
+        <div class="skills-list" id="skillsList">
+          <span data-level="beginner">HTML</span>
+          <span data-level="beginner">CSS</span>
+          <span data-level="intermediate">JavaScript</span>
+          <span data-level="intermediate">Git</span>
+          <span data-level="intermediate">Responsive Design</span>
+          <span data-level="advanced">UI/UX</span>
+          <span data-level="advanced">API Integration</span>
+          <span data-level="intermediate">Accessibility</span>
+        </div>
+        <p class="skills-hint" id="skillsHint"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROJECTS ── -->
+  <section class="section projects" id="projects">
+    <div class="section__label">02 — Projects</div>
+    <h2>Things I've built</h2>
+
+    <!-- Filter + Sort bar -->
+    <div class="controls-bar">
+      <div class="filter-bar" role="group" aria-label="Filter projects">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="HTML">HTML</button>
+        <button class="filter-btn" data-filter="CSS">CSS</button>
+        <button class="filter-btn" data-filter="JS">JS</button>
+        <button class="filter-btn" data-filter="API">API</button>
+      </div>
+      <div class="sort-bar">
+        <label for="sortSelect" class="sort-label">Sort:</label>
+        <select id="sortSelect" class="sort-select" aria-label="Sort projects">
+          <option value="default">Default</option>
+          <option value="name-asc">Name A→Z</option>
+          <option value="name-desc">Name Z→A</option>
+          <option value="date-new">Newest</option>
+          <option value="date-old">Oldest</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="projects__grid" id="projectsGrid">
+
+      <article class="card" data-tags="HTML CSS JS" data-name="To-Do List App" data-date="2024-01">
+        <img src="assets/images/sticky-note_15188321.png" alt="To-Do List App" class="card__img" loading="lazy" width="600" height="190" />
+        <div class="card__body">
+          <h3>To-Do List App</h3>
+          <p>A task manager where you can add, complete, and delete tasks. Built with HTML, CSS, and vanilla JavaScript with localStorage persistence.</p>
+          <div class="card__tags"><span>HTML</span><span>CSS</span><span>JS</span></div>
+          <a href="#" class="btn btn--ghost">View →</a>
+        </div>
+      </article>
+
+      <article class="card" data-tags="JS API" data-name="Weather App" data-date="2024-03">
+        <img src="assets/images/snowing_3691310.png" alt="Weather App" class="card__img" loading="lazy" width="600" height="190" />
+        <div class="card__body">
+          <h3>Weather App</h3>
+          <p>Search any city and get live weather data including temperature and conditions. Built using the OpenWeatherMap API.</p>
+          <div class="card__tags"><span>JS</span><span>API</span></div>
+          <a href="#" class="btn btn--ghost">View →</a>
+        </div>
+      </article>
+
+      <article class="card" data-tags="HTML CSS" data-name="Landing Page" data-date="2023-11">
+        <div class="card__img card__img--placeholder" role="img" aria-label="Landing Page project">
+          <span class="card__placeholder-icon">🖥</span>
+        </div>
+        <div class="card__body">
+          <h3>Landing Page</h3>
+          <p>A responsive landing page with modern CSS layouts, animations, and a clean design system built from scratch.</p>
+          <div class="card__tags"><span>HTML</span><span>CSS</span></div>
+          <a href="#" class="btn btn--ghost">View →</a>
+        </div>
+      </article>
+
+      <article class="card" data-tags="JS API" data-name="Quiz App" data-date="2024-05">
+        <div class="card__img card__img--placeholder" role="img" aria-label="Quiz App project">
+          <span class="card__placeholder-icon">🧠</span>
+        </div>
+        <div class="card__body">
+          <h3>Quiz App</h3>
+          <p>An interactive quiz application that fetches questions from the Open Trivia API and tracks score with a countdown timer.</p>
+          <div class="card__tags"><span>JS</span><span>API</span></div>
+          <a href="#" class="btn btn--ghost">View →</a>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Empty state -->
+    <div class="projects__empty" id="projectsEmpty" hidden>
+      <span>🔍</span>
+      <p>No projects match this filter.</p>
+      <button class="btn btn--ghost" id="clearFilter">Show all projects</button>
+    </div>
+
+  </section>
+
+  <!-- ── GITHUB REPOS (API Integration) ── -->
+  <section class="section github-section" id="github">
+    <div class="section__label">03 — GitHub</div>
+    <h2>My repositories</h2>
+    <p class="github__sub">Live data pulled from the GitHub API.</p>
+
+    <div class="github__controls">
+      <input type="text" id="githubSearch" class="github__search" placeholder="Search repos…" aria-label="Search repositories" />
+      <div class="github__stats" id="githubStats"></div>
+    </div>
+
+    <div class="github__grid" id="githubGrid">
+      <div class="github__loading" id="githubLoading">
+        <div class="spinner" aria-label="Loading repositories"></div>
+        <p>Fetching repositories…</p>
+      </div>
+    </div>
+    <div class="github__error" id="githubError" hidden>
+      <span>⚠️</span>
+      <p>Could not load repositories. Check your connection and try again.</p>
+      <button class="btn btn--ghost btn--sm" id="githubRetry">Retry</button>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section class="section contact" id="contact">
+    <div class="section__label">04 — Contact</div>
+    <h2>Let's talk</h2>
+    <p class="contact__sub">Have a question, opportunity, or just want to say hi?</p>
+
+    <form class="contact__form" id="contactForm" novalidate>
+      <div class="form-group">
+        <label for="name">Name <span aria-hidden="true">*</span></label>
+        <input type="text" id="name" name="name" placeholder="Your name" required autocomplete="name" />
+        <span class="field-error" id="nameError" role="alert"></span>
+      </div>
+      <div class="form-group">
+        <label for="email">Email <span aria-hidden="true">*</span></label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email" />
+        <span class="field-error" id="emailError" role="alert"></span>
+      </div>
+      <div class="form-group">
+        <label for="subject">Subject</label>
+        <select id="subject" name="subject" class="form-select">
+          <option value="">— Select a topic —</option>
+          <option value="opportunity">Job / Opportunity</option>
+          <option value="collaboration">Collaboration</option>
+          <option value="feedback">Feedback</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Message <span aria-hidden="true">*</span></label>
+        <textarea id="message" name="message" rows="5" placeholder="What's on your mind?" required></textarea>
+        <span class="char-count" id="charCount">0 / 500</span>
+        <span class="field-error" id="messageError" role="alert"></span>
+      </div>
+      <button type="submit" class="btn btn--primary" id="submitBtn">Send message →</button>
+      <p class="form__feedback" id="formFeedback" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <span>© 2026 Ibrahim AL-Ghamdi</span>
+    <span class="footer__countdown" id="footerCountdown"></span>
+    <span>Built with HTML · CSS · JS</span>
+  </footer>
+
+  <!-- Back-to-top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top" hidden>↑</button>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
